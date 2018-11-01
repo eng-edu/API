@@ -12,5 +12,7 @@ router.post('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', manterDiscente.post)
 router.put('/:ID/:NOME/:INSTITUICAO/:EMAIL/:SENHA', manterDiscente.put)
 router.delete('/:ID', manterDiscente.delet)
 router.get('/list', manterDiscente.get)
+
+//exporta o modulo
 module.exports = router
 

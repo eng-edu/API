@@ -3,7 +3,7 @@
 const execute = require('../executeSQL');
 
 exports.get = ('/:ID', (req, res) => {
-    var sqlQry = `SELECT * FROM DISCENTE WHERE ID = '${req.params.ID}'`;
+    var sqlQry = `SELECT * FROM DOCENTE WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
@@ -16,14 +16,14 @@ exports.get = ('/:ID', (req, res) => {
 
 })
 
-exports.post = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
+exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
 
     const NOME = req.params.NOME;
-    const INSTITUICAO = req.params.INSTITUICAO;
+    const FORMACAO = req.params.FORMACAO;
     const EMAIL = req.params.EMAIL;
     const SENHA = req.params.SENHA;
 
-    var sqlQry = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}')`;
+    var sqlQry = `INSERT INTO DOCENTE (NOME, FORMACAO, EMAIL, SENHA) VALUES ('${NOME}','${FORMACAO}','${EMAIL}','${SENHA}')`;
 
     execute.executeSQL(sqlQry, function (results) {
 
@@ -37,15 +37,15 @@ exports.post = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
 
 });
 
-exports.put = ('/:ID/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
+exports.put = ('/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
 
     const ID = req.params.ID
     const NOME = req.params.NOME
-    const INSTITUICAO = req.params.INSTITUICAO
+    const FORMACAO = req.params.FORMACAO
     const EMAIL = req.params.EMAIL
     const SENHA = req.params.SENHA
 
-    var sqlQry = `UPDATE DISCENTE SET NOME = '${NOME}', INSTITUICAO = '${INSTITUICAO}', EMAIL = '${EMAIL}', SENHA = '${SENHA}' WHERE ID = '${ID}'`
+    var sqlQry = `UPDATE DOCENTE SET NOME = '${NOME}', FORMACAO = '${FORMACAO}', EMAIL = '${EMAIL}', SENHA = '${SENHA}' WHERE ID = '${ID}'`
 
     execute.executeSQL(sqlQry, function (results) {
         if (results['affectedRows'] > 0) {
@@ -59,7 +59,7 @@ exports.put = ('/:ID/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
 });
 
 exports.delet = ('/:ID', (req, res) => {
-    var sqlQry = `DELETE FROM DISCENTE WHERE ID = '${req.params.ID}'`;
+    var sqlQry = `DELETE FROM DOCENTE WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results['affectedRows'] > 0) {
@@ -73,7 +73,7 @@ exports.delet = ('/:ID', (req, res) => {
 })
 
 exports.get = ('/list', (req, res) => {
-    var sqlQry = `SELECT * FROM DISCENTE`;
+    var sqlQry = `SELECT * FROM DOCENTE`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
