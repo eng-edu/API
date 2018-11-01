@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('mysql');
 const port = process.env.PORT || 3000
 const indexRoute = require('./routes/index')
+const discenteRoute = require('./routes/routerDiscente')
 
 //configura conexao com banco
 exports.connection = mysql.createConnection({
@@ -15,5 +16,6 @@ exports.connection = mysql.createConnection({
 
 //carregando rotas
 app.use('/api', indexRoute);
+app.use('/discente', discenteRoute)
  
 module.exports = app;
