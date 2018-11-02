@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 //controller
-const manterDocente = require('../controllers/manterEtapa')
+const manterEtapa = require('../controllers/manterEtapa')
 
 //rotas
 router.get('/:ID', manterEtapa.get)
