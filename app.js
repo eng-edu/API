@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
   if (tokenCli == tokenAPI) {
     next();
   } else {
-    res.status(403).send('não autorizado!');
+    res.status(203).send('não autorizado!');
   }
 
 });

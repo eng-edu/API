@@ -33,12 +33,12 @@ router.get('/:EMAIL/:SENHA', (req, res, next) => {
 
             }else{
         
-            res.status(403).send('Dados incoretos');
+            res.status(203).send('Dados incoretos');
        
             }
 
         }catch(ex){
-            res.status(403).send('Dados incoretos');
+            res.status(203).send('Dados incoretos');
         }
 
     });
