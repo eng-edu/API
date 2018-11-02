@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000
 const indexRoute = require('./routes/index')
 const discenteRoute = require('./routes/routerDiscente')
 const docenteRoute = require('./routes/routerDocente')
-
+const arcoRoute = require('./routes/routerArco')
 
 //configura conexao com banco
 exports.connection = mysql.createConnection({
@@ -22,5 +22,6 @@ exports.connection = mysql.createConnection({
 app.use('/api', indexRoute);
 app.use('/discente', discenteRoute)
 app.use('/docente', docenteRoute)
+app.use('/arco', arcoRoute)
 
 module.exports = app;
