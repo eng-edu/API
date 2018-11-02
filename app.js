@@ -8,6 +8,7 @@ const indexRoute = require('./routes/index')
 const discenteRoute = require('./routes/routerDiscente')
 const docenteRoute = require('./routes/routerDocente')
 const arcoRoute = require('./routes/routerArco')
+const etapaRoute = require('./routes/routerEtapa')
 
 //configura conexao com banco
 exports.connection = mysql.createConnection({
@@ -23,5 +24,6 @@ app.use('/api', indexRoute);
 app.use('/discente', discenteRoute)
 app.use('/docente', docenteRoute)
 app.use('/arco', arcoRoute)
+app.use('/etapa', etapaRoute)
 
 module.exports = app;
