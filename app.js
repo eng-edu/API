@@ -10,6 +10,7 @@ const docenteRoute = require('./routes/routerDocente')
 const arcoRoute = require('./routes/routerArco')
 const etapaRoute = require('./routes/routerEtapa')
 const documentoRoute = require('./routes/routerDocumento')
+const mensagemRoute = require('./routes/routerMensagem')
 
 //configura conexao com banco
 exports.connection = mysql.createConnection({
@@ -27,6 +28,7 @@ app.use('/docente', docenteRoute)
 app.use('/arco', arcoRoute)
 app.use('/etapa', etapaRoute)
 app.use('/documento', documentoRoute)
+app.use('/mensagem', mensagemRoute)
 
 //exporta o modulo
 module.exports = app;
