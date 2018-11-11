@@ -3,7 +3,9 @@
 const execute = require('../executeSQL');
 
 exports.get = ('/:DISCENTE_ID', (req, res) => {
-    var sqlQry = `select * from ARCO inner join GRUPO where DISCENTE_ID = '${req.params.DISCENTE_ID}' AND ARCO.ID = GRUPO.ARCO_ID`;
+
+    
+    var sqlQry = `select ARCO.ID, ARCO.STATUS, ARCO.NOME, ARCO.ID_CRIADOR, ARCO.DOCENTE_ID, ARCO.COMPARTILHADO from ARCO inner join GRUPO where DISCENTE_ID = '${req.params.DISCENTE_ID}' AND ARCO.ID = GRUPO.ARCO_ID`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
@@ -182,19 +184,3 @@ exports.delet = ('/:ID', (req, res) => {
 })
 
 
-
-
-
-/**exports.get = ('/compartilhados', (req, res) => {
-    var sqlQry = `SELECT * FROM ARCO WHERE COMPARTILHADO = 1`;
-    execute.executeSQL(sqlQry, function (results) {
-
-        if (results['affectedRows'] > 0) {
-            res.status(200).send({ results });
-        } else {
-            res.status(405).send(results);
-        }
-        console.log(results);
-    });
-
-}) */
