@@ -1,8 +1,10 @@
 'use strict';
-
 const execute = require('../executeSQL');
-exports.get = ('/compartilhados', (req, res) => {
-    var sqlQry = `SELECT * FROM ARCO WHERE COMPARTILHADO = 1 AND NOT ARCO.STATUS = 'AGUARDANDO APROVAÇÃO DE ORIENTAÇÃO';`;
+
+exports.get = ('/solicitacoes', (req, res) => {
+
+    var sqlQry = `SELECT S.ID, S.ARCO_ID, S.DOCENTE_ID, A.NOME FROM SOLICITACAO AS S INNER JOIN ARCO AS A WHERE S.ARCO_ID = A.ID`;
+    
     execute.executeSQL(sqlQry, function (results) {
         if (results.length > 0) {
             res.status(200).send(results)
@@ -12,4 +14,4 @@ exports.get = ('/compartilhados', (req, res) => {
         console.log(results)
     });
 
-}) 
+})
