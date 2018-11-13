@@ -8,7 +8,7 @@ const manterArco = require('../controllers/manterArco2')
 
 //rotas
 router.get('/compartilhados', manterArco.get) 
-
+router.put('/:ID/:ARCO_ID', manterArco.put)
 
 
 //exporta o modulo
