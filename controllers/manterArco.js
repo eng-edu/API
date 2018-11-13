@@ -188,6 +188,7 @@ exports.delet = ('/:ID', (req, res) => {
                 deletarArco()
             } else {
                 console.log(results);
+                deletarArco()
             }
 
         });
