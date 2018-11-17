@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 
-
 //chama os modulos das rotas
 const indexRoute = require('./routes/index')
 const discenteRoute = require('./routes/routerDiscente')
@@ -16,7 +15,6 @@ const mensagemRoute = require('./routes/routerMensagem')
 const discenteLogin = require('./routes/loginDiscente')
 const docenteLogin = require('./routes/loginDocente')
 const tokenAPI = require('./token')
-
 
 //configura conexao com banco
 exports.connection = mysql.createConnection({
@@ -31,7 +29,6 @@ exports.connection = mysql.createConnection({
 app.use('/index', indexRoute);
 app.use('/loginDiscente', discenteLogin)
 app.use('/loginDocente', docenteLogin)
-
 
 //interceptar as rotas
 app.use(function (req, res, next) {
@@ -48,7 +45,6 @@ app.use(function (req, res, next) {
 
 });
 
-
 //setando as rotas
 app.use('/discente', discenteRoute)
 app.use('/docente', docenteRoute)
@@ -56,7 +52,6 @@ app.use('/arco', arcoRoute)
 app.use('/etapa', etapaRoute)
 app.use('/documento', documentoRoute)
 app.use('/mensagem', mensagemRoute)
-
 
 //exporta o modulo
 module.exports = app;
