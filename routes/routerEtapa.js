@@ -7,11 +7,11 @@ const router = express.Router()
 const manterEtapa = require('../controllers/manterEtapa')
 
 //rotas
-router.get('/:ID', manterEtapa.get)
-router.post('/:NOME/:RESUMO/:STATUS/:ARCO_ID', manterEtapa.post)
-router.put('/:ID/:NOME/:RESUMO/:STATUS/:ARCO_ID', manterEtapa.put)
-router.delete('/:ID', manterEtapa.delet)
-router.get('/list', manterEtapa.get)
+router.put('/salvarEtapa/:ID/:RESUMO', manterEtapa.put1)
+router.put('/submeterEtapa/:ID/:RESUMO', manterEtapa.put2)
+router.put('/aprovarEtapa/:ID/:PROX_ID', manterEtapa.put3)
+router.put('/reprovarEtapa/:ID', manterEtapa.put4)
+router.get('/listarEtapasArco/:ARCO_ID', manterEtapa.get5)
 
 //exporta o modulo
 module.exports = router
