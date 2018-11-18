@@ -5,6 +5,7 @@ const app = express();
 const mysql = require('mysql');
 
 //chama os modulos das rotas
+const up = require('./routes/up')
 const indexRoute = require('./routes/index')
 const discenteRoute = require('./routes/routerDiscente')
 const docenteRoute = require('./routes/routerDocente')
@@ -14,6 +15,7 @@ const documentoRoute = require('./routes/routerDocumento')
 const mensagemRoute = require('./routes/routerMensagem')
 const discenteLogin = require('./routes/loginDiscente')
 const docenteLogin = require('./routes/loginDocente')
+
 const tokenAPI = require('./token')
 
 //configura conexao com banco
@@ -26,40 +28,12 @@ exports.connection = mysql.createConnection({
 });
 
 
-//down
-
-var multer = require('multer');
-var uuid = require('uuid');
-
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads');
-  },
-  filename: function (req, file, cb) {
-
-    cb(null, uuid.v4());
-  }
-})
-
-var upload = multer({ storage: storage });
-var upload = multer({ dest: 'uploads/' });
-
-
-app.use(express.static('public'));
-
-app.post('/profile', upload.single('avatar'), function (req, res, next) {
-  console.log('>>', req.file);
-  res.status(200).redirect('/')
- 
-})
-
-
-
 //carregando rotas
+app.use('/upload', up);
 app.use('/index', indexRoute);
 app.use('/loginDiscente', discenteLogin)
 app.use('/loginDocente', docenteLogin)
+
 
 //interceptar as rotas
 app.use(function (req, res, next) {
@@ -83,6 +57,7 @@ app.use('/arco', arcoRoute)
 app.use('/etapa', etapaRoute)
 app.use('/documento', documentoRoute)
 app.use('/mensagem', mensagemRoute)
+
 
 //exporta o modulo
 module.exports = app;

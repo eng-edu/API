@@ -16,7 +16,6 @@
     "nodemon": "^1.18.5",
     "pm2": "^3.2.2",
     "socket.io": "^2.1.1",
-    "multer": "^1.4.1",
-    "uuid": "^3.3.2"
+    "connect-multiparty": "^1.2.5"
   }
 }

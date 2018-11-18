@@ -3,6 +3,9 @@
 const express = require('express')
 const router = express.Router()
 
+
+
+
 //controller
 const manterDiscente = require('../controllers/manterDiscente')
 
