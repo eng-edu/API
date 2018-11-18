@@ -22,6 +22,7 @@ exports.post = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
     const INSTITUICAO = req.params.INSTITUICAO;
     const EMAIL = req.params.EMAIL;
     const SENHA = req.params.SENHA;
+  
 
     var sqlQry = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}')`;
 
