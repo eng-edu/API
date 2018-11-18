@@ -25,6 +25,37 @@ exports.connection = mysql.createConnection({
   database: 'BDARCO'
 });
 
+
+//down
+
+var multer = require('multer');
+var uuid = require('uuid');
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads');
+  },
+  filename: function (req, file, cb) {
+
+    cb(null, uuid.v4());
+  }
+})
+
+var upload = multer({ storage: storage });
+var upload = multer({ dest: 'uploads/' });
+
+
+app.use(express.static('public'));
+
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+  console.log('>>', req.file);
+  res.status(200).redirect('/')
+ 
+})
+
+
+
 //carregando rotas
 app.use('/index', indexRoute);
 app.use('/loginDiscente', discenteLogin)
