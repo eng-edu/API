@@ -21,11 +21,11 @@ exports.post = ('/:JSON', (req, res) => {
     var jsonData = JSON.parse(req.params.JSON);
 
     const NOME = jsonData.NOME;
-    const CAMINHO = "";
+    const BASE64 = jsonData.BASE64;
     const ETAPA_ID = jsonData.ETAPA_ID;
     const ETAPA_ARCO_ID = jsonData.ETAPA_ARCO_ID;
 
-    var sqlQry = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ETAPA_ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ETAPA_ARCO_ID}')`;
+    var sqlQry = `INSERT INTO DOCUMENTO (NOME, BASE64, ETAPA_ID, ETAPA_ARCO_ID) VALUES ('${NOME}','${BASE64}','${ETAPA_ID}','${ETAPA_ARCO_ID}')`;
 
     execute.executeSQL(sqlQry, function (results) {
 
