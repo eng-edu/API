@@ -22,6 +22,7 @@ exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
     const FORMACAO = req.params.FORMACAO;
     const EMAIL = req.params.EMAIL;
     const SENHA = req.params.SENHA; 
+
     var sqlQry = `INSERT INTO DOCENTE (NOME, FORMACAO, EMAIL, SENHA) VALUES ('${NOME}','${FORMACAO}','${EMAIL}','${SENHA}')`;
 
     execute.executeSQL(sqlQry, function (results) {
@@ -33,6 +34,7 @@ exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
         }
         console.log(results);
     });
+
 
 });
 

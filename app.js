@@ -5,7 +5,6 @@ const app = express();
 const mysql = require('mysql');
 
 //chama os modulos das rotas
-const up = require('./routes/up')
 const indexRoute = require('./routes/index')
 const discenteRoute = require('./routes/routerDiscente')
 const docenteRoute = require('./routes/routerDocente')
@@ -27,9 +26,15 @@ exports.connection = mysql.createConnection({
   database: 'BDARCO'
 });
 
+//up
+var multiparty = require('connect-multiparty');
+var router = express.Router();
+
+
+app.use('/api', router);
+router.route('/upload').post(multiparty(), require('./controllers/controllerUp'));
 
 //carregando rotas
-app.use('/upload', up);
 app.use('/index', indexRoute);
 app.use('/loginDiscente', discenteLogin)
 app.use('/loginDocente', docenteLogin)

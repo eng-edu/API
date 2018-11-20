@@ -16,12 +16,14 @@ exports.get = ('/:ID', (req, res) => {
 
 })
 
-exports.post = ('/:NOME/:CAMINHO/:ETAPA_ID/:ETAPA_ARCO_ID', (req, res) => {
+exports.post = ('/:JSON', (req, res) => {
 
-    const NOME = req.params.NOME;
-    const CAMINHO = req.params.CAMINHO;
-    const ETAPA_ID = req.params.ETAPA_ID;
-    const ETAPA_ARCO_ID = req.params.ETAPA_ARCO_ID;
+    var jsonData = JSON.parse(req.params.JSON);
+
+    const NOME = jsonData.NOME;
+    const CAMINHO = "";
+    const ETAPA_ID = jsonData.ETAPA_ID;
+    const ETAPA_ARCO_ID = jsonData.ETAPA_ARCO_ID;
 
     var sqlQry = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ETAPA_ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ETAPA_ARCO_ID}')`;
 
