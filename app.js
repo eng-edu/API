@@ -5,6 +5,7 @@ const app = express();
 const mysql = require('mysql');
 
 //chama os modulos das rotas
+const upRoute = require('./routes/up')
 const indexRoute = require('./routes/index')
 const discenteRoute = require('./routes/routerDiscente')
 const docenteRoute = require('./routes/routerDocente')
@@ -26,13 +27,6 @@ exports.connection = mysql.createConnection({
   database: 'BDARCO'
 });
 
-//up
-var multiparty = require('connect-multiparty');
-var router = express.Router();
-
-
-app.use('/api', router);
-router.route('/upload/:ARCO_ID/:ETAPA_ARCO_ID').post(multiparty(), require('./controllers/controllerUp'));
 
 //carregando rotas
 app.use('/index', indexRoute);
@@ -62,6 +56,7 @@ app.use('/arco', arcoRoute)
 app.use('/etapa', etapaRoute)
 app.use('/documento', documentoRoute)
 app.use('/mensagem', mensagemRoute)
+app.use('/upp', upRoute)
 
 
 //exporta o modulo
