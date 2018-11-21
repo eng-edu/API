@@ -28,6 +28,17 @@ exports.connection = mysql.createConnection({
 });
 
 
+//ver pdf link
+app.get('/PDF/:NAME', function (req, res) {
+  var filePath = "/uploads/"+req.params.NAME;
+  var fs = require('fs')
+  fs.readFile(__dirname + filePath, function (err, data) {
+    res.contentType("application/pdf");
+    res.send(data);
+  });
+});
+
+
 //carregando rotas
 app.use('/index', indexRoute);
 app.use('/loginDiscente', discenteLogin)
@@ -57,6 +68,10 @@ app.use('/etapa', etapaRoute)
 app.use('/documento', documentoRoute)
 app.use('/mensagem', mensagemRoute)
 app.use('/upp', upRoute)
+
+app.use(express.static('uploads'));
+
+
 
 
 //exporta o modulo
