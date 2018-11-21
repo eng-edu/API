@@ -32,7 +32,7 @@ var router = express.Router();
 
 
 app.use('/api', router);
-router.route('/upload').post(multiparty(), require('./controllers/controllerUp'));
+router.route('/upload/:ARCO_ID/:ETAPA_ARCO_ID').post(multiparty(), require('./controllers/controllerUp'));
 
 //carregando rotas
 app.use('/index', indexRoute);
