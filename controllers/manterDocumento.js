@@ -16,22 +16,10 @@ exports.get = ('/:ID', (req, res) => {
 
 })
 
-const multiparty = require('connect-multiparty');
+exports.post = ('/:JSON', (req, res) => {
 
+    var jsonData = JSON.parse(req.params.JSON);
 
-exports.post = (multiparty(),'/TESTE', (req, res) => {
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-	var temporario = req.files.file.path;
-	var novo = './uploads/' + req.files.file.name;
-	fs.rename(temporario, novo, function(err){
-		if(err){
-			res.status(500).json({error: err})
-		}
-		res.json({message: "enviado com sucesso.", file: novo});
-	})
-
-    /** 
     const NOME = jsonData.NOME;
     const BASE64 = jsonData.BASE64;
     const ETAPA_ID = jsonData.ETAPA_ID;
@@ -48,9 +36,6 @@ exports.post = (multiparty(),'/TESTE', (req, res) => {
         }
         console.log(results);
     });
-
-    
-    /** */
 
 });
 
