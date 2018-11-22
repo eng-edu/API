@@ -60,7 +60,7 @@ exports.put = ('/:ID/:NOME/:CAMINHO/:ETAPA_ID/:ETAPA_ARCO_ID', (req, res) => {
 
 });
 
-exports.delet = ('/:ID', (req, res) => {
+exports.delet = ('/apagarArquivosEtapa/:ID', (req, res) => {
     var sqlQry = `DELETE FROM DOCUMENTO WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
