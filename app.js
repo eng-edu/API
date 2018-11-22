@@ -31,6 +31,7 @@ exports.connection = mysql.createConnection({
 //ver pdf link
 app.get('/PDF/:NAME', function (req, res) {
   var filePath = "/uploads/"+req.params.NAME;
+  console.log("chamou arquivo: " + req.params.NAME)
   var fs = require('fs')
   fs.readFile(__dirname + filePath, function (err, data) {
     res.contentType("application/pdf");
