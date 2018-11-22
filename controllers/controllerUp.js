@@ -3,9 +3,6 @@ const execute = require('../executeSQL');
 
 module.exports = function (req, res) {
 
-	//	console.log(req.params.ARCO_ID)
-	//	console.log(req.params.ETAPA_ARCO_ID)
-
 	const uuidv4 = require('uuid/v4'); 
 	var filename = uuidv4();
 
@@ -14,12 +11,11 @@ module.exports = function (req, res) {
 	//	var novo = './uploads/' + req.files.file.name;
 
 	const NOME = req.files.file.name;
-    const BASE64 = './uploads/' + filename + ".pdf"; //CAMINHO
-    const ETAPA_ID = req.params.ETAPA_ARCO_ID
-    const ETAPA_ARCO_ID = req.params.ARCO_ID
+    const CAMINHO = './uploads/' + filename + ".pdf"; //CAMINHO
+    const ETAPA_ID = req.params.ETAPA_ID
+    const ARCO_ID = req.params.ARCO_ID
 
-
-	var sqlQry = `INSERT INTO DOCUMENTO (NOME, BASE64, ETAPA_ID, ETAPA_ARCO_ID) VALUES ('${NOME}','${BASE64}','${ETAPA_ID}','${ETAPA_ARCO_ID}')`;
+	var sqlQry = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ARCO_ID}')`;
 
     execute.executeSQL(sqlQry, function (results) {
 

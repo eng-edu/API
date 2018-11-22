@@ -2,8 +2,8 @@
 
 const execute = require('../executeSQL');
 
-exports.get = ('/:ID', (req, res) => {
-    var sqlQry = `SELECT * FROM DOCUMENTO WHERE ID = '${req.params.ID}'`;
+exports.get = ('/buscarArquivos/:ETAPA_ID', (req, res) => {
+    var sqlQry = `SELECT * FROM DOCUMENTO WHERE ETAPA_ID = '${req.params.ETAPA_ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
