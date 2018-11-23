@@ -22,7 +22,7 @@ exports.executeSQL = function(stringSQL, callbeck){
         }
 
        
-     //   console.log("executou SQL:" + stringSQL);
+      console.log("executou SQL:" + stringSQL);
     });
     
     

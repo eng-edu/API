@@ -22,14 +22,28 @@ exports.post = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
     const INSTITUICAO = req.params.INSTITUICAO;
     const EMAIL = req.params.EMAIL;
     const SENHA = req.params.SENHA;
-  
+    const CAMINHO = './uploads/' + results['insertId'] + "_discente.jpg"
 
-    var sqlQry = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}')`;
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
+    var temporario = req.files.file.path;
+
+    var sqlQry = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA, FOTO) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}', '${CAMINHO}')`;
 
     execute.executeSQL(sqlQry, function (results) {
 
         if (results['insertId'] > 0) {
             res.status(201).send({ results });
+
+            var fs = require('fs');
+
+            fs.rename(temporario, CAMINHO, function (err) {
+                if (err) {
+                    //  res.status(500).json({ error: err })
+                }
+                //  res.json({ message: "enviado com sucesso" });
+            })
+
         } else {
             res.status(405).send(results);
         }

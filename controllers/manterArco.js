@@ -151,8 +151,10 @@ exports.delet4 = ('/excluirArco/:ID', (req, res) => {
     var sqlQry2 = `DELETE FROM GRUPO WHERE ARCO_ID = '${req.params.ID}'`;
     var sqlQry3 = `DELETE FROM SOLICITACAO WHERE ARCO_ID = '${req.params.ID}'`;
     var sqlQry4 = `DELETE FROM ARCO WHERE ID = '${req.params.ID}'`;
+    var sqlQry5 = `DELETE FROM DOCUMENTO WHERE ARCO_ID = '${req.params.ID}'`;
+  
+    excluirDocumentos()
 
-    deletarEtapa();
 
     function deletarEtapa() {
 
@@ -160,6 +162,7 @@ exports.delet4 = ('/excluirArco/:ID', (req, res) => {
 
             if (results['affectedRows'] > 0) {
                 deletarGrupo()
+            
             } else {
                 console.log(results);
             }
@@ -205,6 +208,20 @@ exports.delet4 = ('/excluirArco/:ID', (req, res) => {
         });
 
     }
+
+    
+    function excluirDocumentos() {
+        execute.executeSQL(sqlQry5, function (results) {
+
+            if (results['affectedRows'] > 0) {
+                deletarEtapa();
+            } else {
+                console.log(results)
+            }
+            
+        });
+
+    }
 })
 
 exports.get5 = ('/bucarArcosCompartilhados', (req, res) => {
@@ -227,7 +244,7 @@ exports.put6 = ('/aceitarSolicitacao/:ID/:ARCO_ID', (req, res) => {
     var sqlQry1 = `UPDATE ARCO SET STATUS = 'EM DESENVOLVIMENTO' WHERE ID = '${req.params.ARCO_ID}'`;
     var sqlQry2 = `UPDATE ETAPA SET STATUS = 4 WHERE ARCO_ID = '${req.params.ARCO_ID}' AND NOME = 'OBSERVAÇÃO DA REALIDADE';`;
     var sqlQry3 = `DELETE FROM SOLICITACAO WHERE ID = '${req.params.ID}'`;
-   
+  
     atulilzarStatusarco();
 
     function atulilzarStatusarco() {
@@ -235,6 +252,7 @@ exports.put6 = ('/aceitarSolicitacao/:ID/:ARCO_ID', (req, res) => {
 
             if (results['affectedRows'] > 0) {
                 atulilzarEtapa()
+              
             } else {
                 console.log(results)
             }
@@ -248,6 +266,7 @@ exports.put6 = ('/aceitarSolicitacao/:ID/:ARCO_ID', (req, res) => {
 
             if (results['affectedRows'] > 0) {
                 excluirSolicitacao()
+               
             } else {
                 console.log(results)
             }
@@ -261,6 +280,7 @@ exports.put6 = ('/aceitarSolicitacao/:ID/:ARCO_ID', (req, res) => {
         execute.executeSQL(sqlQry3, function (results) {
 
             if (results['affectedRows'] > 0) {
+              
                 res.status(201).send(results)
             } else {
                 res.status(405).send(results);
@@ -268,6 +288,7 @@ exports.put6 = ('/aceitarSolicitacao/:ID/:ARCO_ID', (req, res) => {
             console.log(results)
         });
     }
+
 
 
 

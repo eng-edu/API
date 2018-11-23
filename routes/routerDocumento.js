@@ -11,7 +11,7 @@ router.get('/buscarArquivos/:ETAPA_ID', manterDocumento.get)
 router.post('/:JSON', manterDocumento.post)
 router.put('/:ID/:NOME/:CAMINHO/:ETAPA_ID/:ETAPA_ARCO_ID', manterDocumento.put)
 router.delete('/apagarArquivosEtapa/:ID', manterDocumento.delet)
-router.get('/list', manterDocumento.get)
+
 
 
 

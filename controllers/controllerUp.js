@@ -3,36 +3,51 @@ const execute = require('../executeSQL');
 
 module.exports = function (req, res) {
 
-	const uuidv4 = require('uuid/v4'); 
-	var filename = uuidv4();
 
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	var temporario = req.files.file.path;
-	//	var novo = './uploads/' + req.files.file.name;
 
 	const NOME = req.files.file.name;
-    const CAMINHO = './uploads/' + filename + ".pdf"; //CAMINHO
-    const ETAPA_ID = req.params.ETAPA_ID
-    const ARCO_ID = req.params.ARCO_ID
+	const CAMINHO = ""
+	const ETAPA_ID = req.params.ETAPA_ID
+	const ARCO_ID = req.params.ARCO_ID
 
-	var sqlQry = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ARCO_ID}')`;
 
-    execute.executeSQL(sqlQry, function (results) {
+	var sqlQry1 = `INSERT INTO GENERATE_ID (NOME) VALUES ('${NOME}')`;
 
-        if (results['insertId'] > 0) {
-            res.status(201);
-        } else {
-            res.status(405);
-        }
-        console.log(results);
-    });
+	gerarId()
 
-	fs.rename(temporario,'./uploads/' + filename + ".pdf", function (err) {
-		if (err) {
-			res.status(500).json({ error: err })
-		}
-		res.json({ message: "enviado com sucesso" });
-	})
+	function gerarId() {
+		execute.executeSQL(sqlQry1, function (results) {
+
+			if (results['insertId'] > 0) {
+	
+				CAMINHO = './uploads/' + results['insertId'] + "_documento.pdf"
+				fs.rename(temporario, CAMINHO, function (err) {
+					inserirArquivo()
+
+				})
+
+			} else {
+				res.status(405);
+			}
+			console.log(results);
+		});
+	}
+
+	var sqlQry2 = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ARCO_ID}')`;
+
+	function inserirArquivo() {
+		execute.executeSQL(sqlQry2, function (results) {
+
+			if (results['insertId'] > 0) {
+				res.status(201);
+			} else {
+				res.status(405);
+			}
+			console.log(results);
+		});
+	}
 
 
 }
