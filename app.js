@@ -27,6 +27,17 @@ exports.connection = mysql.createConnection({
   database: 'BDARCO'
 });
 
+//ver imagem
+app.get('/IMG/:NAME', function (req, res) {
+  var filePath = "/uploads/"+req.params.NAME;
+  console.log("chamou arquivo: " + req.params.NAME)
+  var fs = require('fs')
+  fs.readFile(__dirname + filePath, function (err, data) {
+    res.contentType("image/jpg");
+    res.send(data);
+  });
+});
+
 
 //ver pdf link
 app.get('/PDF/:NAME', function (req, res) {
