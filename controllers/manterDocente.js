@@ -53,9 +53,11 @@ exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
         });
     
 
-    var sqlQry2 = `INSERT INTO DOCENTE (NOME, FORMACAO, EMAIL, SENHA) VALUES ('${NOME}','${FORMACAO}','${EMAIL}','${SENHA}')`;
-
+  
     function novoDocente(){
+
+        var sqlQry2 = `INSERT INTO DOCENTE (NOME, FORMACAO, EMAIL, SENHA, FOTO) VALUES ('${NOME}','${FORMACAO}','${EMAIL}','${SENHA}', '${CAMINHO}')`;
+
         execute.executeSQL(sqlQry2, function (results) {
 
             if (results['insertId'] > 0) {

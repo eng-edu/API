@@ -53,11 +53,14 @@ exports.post = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
             console.log(results);
         });
     
+       
 
-
-    var sqlQry2 = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA, FOTO) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}', '${CAMINHO}')`;
-
+   
     function novoDiscente(){
+
+        var sqlQry2 = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA, FOTO) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}', '${CAMINHO}')`;
+
+
         execute.executeSQL(sqlQry2, function (results) {
 
             if (results['insertId'] > 0) {

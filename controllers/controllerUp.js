@@ -8,12 +8,11 @@ module.exports = function (req, res) {
 	var temporario = req.files.file.path;
 
 	const NOME = req.files.file.name;
-	const CAMINHO = ""
+	var CAMINHO = ""
 	const ETAPA_ID = req.params.ETAPA_ID
 	const ARCO_ID = req.params.ARCO_ID
 
-
-	var sqlQry1 = `INSERT INTO GENERATE_ID (NOME) VALUES ('${NOME}')`;
+	var sqlQry1 = `INSERT INTO GENERATE_ID (NAME) VALUES ('${NOME}')`;
 
 	gerarId()
 
@@ -21,29 +20,27 @@ module.exports = function (req, res) {
 		execute.executeSQL(sqlQry1, function (results) {
 
 			if (results['insertId'] > 0) {
-	
 				CAMINHO = './uploads/' + results['insertId'] + "_documento.pdf"
 				fs.rename(temporario, CAMINHO, function (err) {
 					inserirArquivo()
-
 				})
+			} 
 
-			} else {
-				res.status(405);
-			}
 			console.log(results);
 		});
 	}
 
-	var sqlQry2 = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ARCO_ID}')`;
 
 	function inserirArquivo() {
+
+		var sqlQry2 = `INSERT INTO DOCUMENTO (NOME, CAMINHO, ETAPA_ID, ARCO_ID) VALUES ('${NOME}','${CAMINHO}','${ETAPA_ID}','${ARCO_ID}')`;
+
 		execute.executeSQL(sqlQry2, function (results) {
 
 			if (results['insertId'] > 0) {
-				res.status(201);
+				res.status(201).send(results);
 			} else {
-				res.status(405);
+				res.status(405).send(results);
 			}
 			console.log(results);
 		});

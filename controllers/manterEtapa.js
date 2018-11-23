@@ -55,6 +55,7 @@ exports.put3 = ('/aprovarEtapa/:ID/:PROX_ID/:ARCO_ID', (req, res) => {
     execute.executeSQL(sqlQry1, function (results) {
         if (results['affectedRows'] > 0) {
             mudarStatusPorx()
+            verficar()
         } else {
             console.log(results);
         }
@@ -73,10 +74,13 @@ exports.put3 = ('/aprovarEtapa/:ID/:PROX_ID/:ARCO_ID', (req, res) => {
         });
     }
 
-    execute.executeSQL(sqlQry3, function (results) {
-            console.log(results);
+    function verficar(){
+        execute.executeSQL(sqlQry3, function (results) {
+            console.log("EXECUTOU");
     });
 
+    }
+   
 });
 
 exports.put4 = ('/reprovarEtapa/:ID', (req, res) => {
