@@ -22,33 +22,56 @@ exports.post = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
     const INSTITUICAO = req.params.INSTITUICAO;
     const EMAIL = req.params.EMAIL;
     const SENHA = req.params.SENHA;
-    const CAMINHO = './uploads/' + results['insertId'] + "_discente.jpg"
+    var CAMINHO = "";
+    var fs = require('fs');
+
+
+    var sqlQry1 = `INSERT INTO GENERATE_ID (NAME) VALUES ('${req.files.file.name}')`;
 
     res.setHeader("Access-Control-Allow-Origin", "*");
 
     var temporario = req.files.file.path;
+    
+   
+        execute.executeSQL(sqlQry1, function (results) {
 
-    var sqlQry = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA, FOTO) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}', '${CAMINHO}')`;
+            if (results['insertId'] > 0) {
 
-    execute.executeSQL(sqlQry, function (results) {
+                CAMINHO = './uploads/' + results['insertId'] + "_discente.jpg"
 
-        if (results['insertId'] > 0) {
-            res.status(201).send({ results });
+                fs.rename(temporario, CAMINHO, function (err) {
+                    if (err) {
+                        res.status(405).send(results);
+                    }
+                  
+                    novoDiscente()
+                })
 
-            var fs = require('fs');
+            } else {
+                res.status(405).send(results);
+            }
+            console.log(results);
+        });
+    
 
-            fs.rename(temporario, CAMINHO, function (err) {
-                if (err) {
-                    //  res.status(500).json({ error: err })
-                }
-                //  res.json({ message: "enviado com sucesso" });
-            })
 
-        } else {
-            res.status(405).send(results);
-        }
-        console.log(results);
-    });
+    var sqlQry2 = `INSERT INTO DISCENTE (NOME, INSTITUICAO, EMAIL, SENHA, FOTO) VALUES ('${NOME}','${INSTITUICAO}','${EMAIL}','${SENHA}', '${CAMINHO}')`;
+
+    function novoDiscente(){
+        execute.executeSQL(sqlQry2, function (results) {
+
+            if (results['insertId'] > 0) {
+                res.status(201).send({ results });
+    
+            } else {
+                res.status(405).send(results);
+            }
+            console.log(results);
+        });
+    }
+
+   
+   
 
 });
 

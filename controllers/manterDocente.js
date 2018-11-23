@@ -22,18 +22,52 @@ exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
     const FORMACAO = req.params.FORMACAO;
     const EMAIL = req.params.EMAIL;
     const SENHA = req.params.SENHA; 
+    var CAMINHO = "";
+    var fs = require('fs');
 
-    var sqlQry = `INSERT INTO DOCENTE (NOME, FORMACAO, EMAIL, SENHA) VALUES ('${NOME}','${FORMACAO}','${EMAIL}','${SENHA}')`;
 
-    execute.executeSQL(sqlQry, function (results) {
+    var sqlQry1 = `INSERT INTO GENERATE_ID (NAME) VALUES ('${req.files.file.name}')`;
 
-        if (results['insertId'] > 0) {
-            res.status(201).send({ results });
-        } else {
-            res.status(405).send(results);
-        }
-        console.log(results);
-    });
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
+    var temporario = req.files.file.path;
+    
+        execute.executeSQL(sqlQry1, function (results) {
+
+            if (results['insertId'] > 0) {
+
+                CAMINHO = './uploads/' + results['insertId'] + "_docente.jpg"
+
+                fs.rename(temporario, CAMINHO, function (err) {
+                    if (err) {
+                        res.status(405).send(results);
+                    }
+                  
+                    novoDocente()
+                })
+
+            } else {
+                res.status(405).send(results);
+            }
+            console.log(results);
+        });
+    
+
+    var sqlQry2 = `INSERT INTO DOCENTE (NOME, FORMACAO, EMAIL, SENHA) VALUES ('${NOME}','${FORMACAO}','${EMAIL}','${SENHA}')`;
+
+    function novoDocente(){
+        execute.executeSQL(sqlQry2, function (results) {
+
+            if (results['insertId'] > 0) {
+                res.status(201).send({ results });
+    
+            } else {
+                res.status(405).send(results);
+            }
+            console.log(results);
+        });
+    }
+
 
 
 });
