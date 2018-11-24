@@ -28,6 +28,7 @@ router.get('/:EMAIL/:SENHA', (req, res, next) => {
                     NOME: results[0]['NOME'],
                     EMAIL: results[0]['EMAIL'],
                     SENHA: results[0]['SENHA'],
+                    FOTO: results[0]['FOTO'],
                     TOKENAPI : tokenAPI
                 });
 
