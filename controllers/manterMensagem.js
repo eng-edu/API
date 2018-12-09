@@ -1,20 +1,12 @@
 'use strict';
-
+const socket = require('../server/serverSocket');
 const execute = require('../executeSQL');
 
-exports.get = ('/:ID', (req, res) => {
-    var sqlQry = `SELECT * FROM MENSAGEM WHERE ID = '${req.params.ID}'`;
-    execute.executeSQL(sqlQry, function (results) {
-
-        if (results.length > 0) {
-            res.status(200).send(results)
-        } else {
-            res.status(405).send(results);
-        }
-        console.log(results)
-    });
-
-})
+socket.on('connection',(io)=>{
+    io.on('ARCO_ID', (id)=>{
+        List(id);
+     });
+ });
 
 exports.post = ('/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', (req, res) => {
 
@@ -29,6 +21,7 @@ exports.post = ('/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', (req, res) => {
 
         if (results['insertId'] > 0) {
             res.status(201).send({ results });
+            List(ARCO_ID);
         } else {
             res.status(405).send(results);
         }
@@ -37,51 +30,17 @@ exports.post = ('/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', (req, res) => {
 
 });
 
-exports.put = ('/:ID/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', (req, res) => {
 
-    const ID = req.params.ID
-    const TEXTO = req.params.TEXTO;
-    const IDAUTOR = req.params.IDAUTOR;
-    const DATA = req.params.DATA;
-    const ARCO_ID = req.params.ARCO_ID;
+function List(ARCO_ID){
 
-    var sqlQry = `UPDATE MENSAGEM SET TEXTO = '${TEXTO}', IDAUTOR = '${IDAUTOR}', DATA = '${DATA}', ARCO_ID = '${ARCO_ID}' WHERE ID = '${ID}'`
-
-    execute.executeSQL(sqlQry, function (results) {
-        if (results['affectedRows'] > 0) {
-            res.status(201).send({ results });
-        } else {
-            res.status(405).send(results);
-        }
-        console.log(results);
-    });
-
-});
-
-exports.delet = ('/:ID', (req, res) => {
-    var sqlQry = `DELETE FROM MENSAGEM WHERE ID = '${req.params.ID}'`;
-    execute.executeSQL(sqlQry, function (results) {
-
-        if (results['affectedRows'] > 0) {
-            res.status(200).send({ results });
-        } else {
-            res.status(405).send(results);
-        }
-        console.log(results);
-    });
-
-})
-
-exports.get = ('/list', (req, res) => {
-    var sqlQry = `SELECT * FROM MENSAGEM`;
+    var s = 'msg'+ARCO_ID;
+    var sqlQry = `SELECT * FROM MENSAGEM WHERE ARCO_ID '${ARCO_ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
-            res.status(200).send(results)
-        } else {
-            res.status(405).send(results);
-        }
+            socket.emit.broadcast(s, results);
+            console.log("socket server emitiu: "+s);
+        } 
         console.log(results)
     });
-
-})
+}
