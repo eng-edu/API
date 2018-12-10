@@ -3,19 +3,21 @@ const socket = require('../server/serverSocket');
 const execute = require('../executeSQL');
 
 socket.on('connection',(io)=>{
-    io.on('ARCO_ID', (id)=>{
+    io.on('LIST_MSG', (id)=>{
         List(id);
+        console.log(id)
      });
  });
 
-exports.post = ('/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', (req, res) => {
+exports.post = ('/:TEXTO/:ID_AUTOR/:NOME_AUTOR/:DATA/:ARCO_ID', (req, res) => {
 
     const TEXTO = req.params.TEXTO;
-    const IDAUTOR = req.params.IDAUTOR;
+    const ID_AUTOR = req.params.ID_AUTOR;
+    const NOME_AUTOR = req.params.NOME_AUTOR;
     const DATA = req.params.DATA;
     const ARCO_ID = req.params.ARCO_ID;
 
-    var sqlQry = `INSERT INTO MENSAGEM (TEXTO, IDAUTOR, DATA, ARCO_ID) VALUES ('${TEXTO}','${IDAUTOR}','${DATA}','${ARCO_ID}')`;
+    var sqlQry = `INSERT INTO MENSAGEM (TEXTO, ID_AUTOR, NOME_AUTOR, DATA, ARCO_ID) VALUES ('${TEXTO}',${ID_AUTOR},'${NOME_AUTOR}','${DATA}',${ARCO_ID})`;
 
     execute.executeSQL(sqlQry, function (results) {
 
@@ -34,11 +36,11 @@ exports.post = ('/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', (req, res) => {
 function List(ARCO_ID){
 
     var s = 'msg'+ARCO_ID;
-    var sqlQry = `SELECT * FROM MENSAGEM WHERE ARCO_ID '${ARCO_ID}'`;
+    var sqlQry = `SELECT * FROM MENSAGEM WHERE ARCO_ID = ${ARCO_ID}`;
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
-            socket.emit.broadcast(s, results);
+            socket.broadcast(s, results);
             console.log("socket server emitiu: "+s);
         } 
         console.log(results)

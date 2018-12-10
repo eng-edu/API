@@ -7,7 +7,7 @@ const router = express.Router()
 const manterMensagem = require('../controllers/manterMensagem')
 
 //rotas
-router.post('/:TEXTO/:IDAUTOR/:DATA/:ARCO_ID', manterMensagem.post)
+router.post('/:TEXTO/:ID_AUTOR/:NOME_AUTOR/:DATA/:ARCO_ID', manterMensagem.post)
 
 //exporta o modulo
 module.exports = router
