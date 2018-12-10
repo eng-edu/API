@@ -40,9 +40,9 @@ function List(ARCO_ID){
     execute.executeSQL(sqlQry, function (results) {
 
         if (results.length > 0) {
-            socket.broadcast(s, results);
-            console.log("socket server emitiu: "+s);
+            socket.sockets.emit(s, results);
+            console.log(results);
         } 
-        console.log(results)
+       // console.log(results)
     });
 }
