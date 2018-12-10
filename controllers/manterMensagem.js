@@ -4,8 +4,15 @@ const execute = require('../executeSQL');
 
 socket.on('connection',(io)=>{
     io.on('LIST_MSG', (id)=>{
-        List(id);
-        console.log(id)
+        var s = 'msg'+id;
+        var sqlQry = `SELECT * FROM MENSAGEM WHERE ARCO_ID = ${id}`;
+        execute.executeSQL(sqlQry, function (results) {
+            if (results.length > 0) {
+                io.emit(s, results);
+                io.broadcast.emit(s, results);
+                console.log(results);
+            } 
+        });
      });
  });
 
@@ -23,7 +30,6 @@ exports.post = ('/:TEXTO/:ID_AUTOR/:NOME_AUTOR/:DATA/:ARCO_ID', (req, res) => {
 
         if (results['insertId'] > 0) {
             res.status(201).send({ results });
-            List(ARCO_ID);
         } else {
             res.status(405).send(results);
         }
@@ -31,18 +37,3 @@ exports.post = ('/:TEXTO/:ID_AUTOR/:NOME_AUTOR/:DATA/:ARCO_ID', (req, res) => {
     });
 
 });
-
-
-function List(ARCO_ID){
-
-    var s = 'msg'+ARCO_ID;
-    var sqlQry = `SELECT * FROM MENSAGEM WHERE ARCO_ID = ${ARCO_ID}`;
-    execute.executeSQL(sqlQry, function (results) {
-
-        if (results.length > 0) {
-            socket.sockets.emit(s, results);
-            console.log(results);
-        } 
-       // console.log(results)
-    });
-}
