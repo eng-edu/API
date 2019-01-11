@@ -2,7 +2,7 @@
 
 const execute = require('../executeSQL');
 
-exports.get = ('/:ID', (req, res) => {
+exports.buscar = ('/buscar/:ID', (req, res) => {
     var sqlQry = `SELECT * FROM DOCENTE WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
@@ -16,7 +16,7 @@ exports.get = ('/:ID', (req, res) => {
 
 })
 
-exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
+exports.inserir = ('/inserir/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
 
     const NOME = req.params.NOME;
     const FORMACAO = req.params.FORMACAO;
@@ -74,7 +74,7 @@ exports.post = ('/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
 
 });
 
-exports.put = ('/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
+exports.modificar = ('/modificar/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
 
     const ID = req.params.ID
     const NOME = req.params.NOME
@@ -95,7 +95,7 @@ exports.put = ('/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', (req, res) => {
 
 });
 
-exports.delet = ('/:ID', (req, res) => {
+exports.deletar = ('/deletar/:ID', (req, res) => {
     var sqlQry = `DELETE FROM DOCENTE WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
@@ -109,7 +109,7 @@ exports.delet = ('/:ID', (req, res) => {
 
 })
 
-exports.get = ('/list', (req, res) => {
+exports.listar = ('/listar', (req, res) => {
     var sqlQry = `SELECT * FROM DOCENTE`;
     execute.executeSQL(sqlQry, function (results) {
 

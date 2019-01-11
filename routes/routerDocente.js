@@ -9,11 +9,11 @@ const multiparty = require('connect-multiparty');
 const manterDocente = require('../controllers/manterDocente')
 
 //rotas
-router.get('/:ID', manterDocente.get)
-router.route('/:NOME/:FORMACAO/:EMAIL/:SENHA').post(multiparty(), manterDocente.post)
-router.put('/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', manterDocente.put)
-router.delete('/:ID', manterDocente.delet)
-router.get('/list', manterDocente.get)
+router.get('/buscar/:ID', manterDocente.buscar)
+router.route('/inserir/:NOME/:FORMACAO/:EMAIL/:SENHA').post(multiparty(), manterDocente.inserir)
+router.put('/modificar/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', manterDocente.modificar)
+router.delete('/deletar/:ID', manterDocente.deletar)
+router.get('/listar', manterDocente.listar)
 
 //exporta o modulo
 module.exports = router

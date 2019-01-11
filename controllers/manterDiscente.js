@@ -2,7 +2,7 @@
 
 const execute = require('../executeSQL');
 
-exports.buscar = ('/:ID', (req, res) => {
+exports.buscar = ('/buscar/:ID', (req, res) => {
     var sqlQry = `SELECT * FROM DISCENTE WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
@@ -16,7 +16,7 @@ exports.buscar = ('/:ID', (req, res) => {
 
 })
 
-exports.inserir = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
+exports.inserir = ('/inserir/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
 
     const NOME = req.params.NOME;
     const INSTITUICAO = req.params.INSTITUICAO;
@@ -78,7 +78,7 @@ exports.inserir = ('/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
 
 });
 
-exports.modificar = ('/:ID/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
+exports.modificar = ('/modificar/:ID/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
 
     const ID = req.params.ID
     const NOME = req.params.NOME
@@ -99,7 +99,7 @@ exports.modificar = ('/:ID/:NOME/:INSTITUICAO/:EMAIL/:SENHA', (req, res) => {
 
 });
 
-exports.deletar = ('/:ID', (req, res) => {
+exports.deletar = ('/deletar/:ID', (req, res) => {
     var sqlQry = `DELETE FROM DISCENTE WHERE ID = '${req.params.ID}'`;
     execute.executeSQL(sqlQry, function (results) {
 
@@ -113,7 +113,7 @@ exports.deletar = ('/:ID', (req, res) => {
 
 })
 
-exports.listar = ('/list', (req, res) => {
+exports.listar = ('/listar', (req, res) => {
     var sqlQry = `SELECT * FROM DISCENTE`;
     execute.executeSQL(sqlQry, function (results) {
 
