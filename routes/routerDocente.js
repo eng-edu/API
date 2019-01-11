@@ -14,6 +14,8 @@ router.route('/inserir/:NOME/:FORMACAO/:EMAIL/:SENHA').post(multiparty(), manter
 router.put('/modificar/:ID/:NOME/:FORMACAO/:EMAIL/:SENHA', manterDocente.modificar)
 router.delete('/deletar/:ID', manterDocente.deletar)
 router.get('/listar', manterDocente.listar)
+router.put('/aceitarSolicitacao/:ID/:ARCO_ID/', manterDocente.aceitarSolicitacao)
+router.get('/buscarSolicitacoes/', manterDocente.buscarSolicitacoes)
 
 //exporta o modulo
 module.exports = router
