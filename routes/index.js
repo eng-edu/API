@@ -8,9 +8,9 @@ const router = express.Router();
 router.get('/', (req, res) => { 
     res.status(200).send({
        title: 'API NodeJs - SISTEMA ARCO',
-       version: '0.0.1',
-       developer: 'eduardo lima',
-       email: 'eduardo.eng15@gmail.com'
+       version: '0.0.2',
+       developer: 'Eduardo lima, Hugo henrique, Vívian souza',
+       email: '6code384@gmail.com'
     });
 });
 
