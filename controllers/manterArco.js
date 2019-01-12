@@ -142,7 +142,7 @@ exports.compartilharArco = ('/compartilharArco/:ID/:COMPARTILHADO', (req, res) =
         console.log(results);
     });
 
-});
+})
 
 exports.excluirArco = ('/excluirArco/:ID', (req, res) => {
 
