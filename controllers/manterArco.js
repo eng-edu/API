@@ -12,7 +12,6 @@ exports.buscarArcoDiscente = ('/buscarArcoDiscente/:DISCENTE_ID', (req, res) => 
         } else {
             res.status(405).send(results);
         }
-        console.log(results)
     });
 
 })
@@ -139,7 +138,6 @@ exports.compartilharArco = ('/compartilharArco/:ID/:COMPARTILHADO', (req, res) =
         } else {
             res.status(405).send(results);
         }
-        console.log(results);
     });
 
 })
@@ -203,7 +201,6 @@ exports.excluirArco = ('/excluirArco/:ID', (req, res) => {
             } else {
                 res.status(405).send(results);
             }
-            console.log(results);
         });
 
     }
@@ -231,7 +228,6 @@ exports.bucarArcosCompartilhados = ('/bucarArcosCompartilhados', (req, res) => {
         } else {
             res.status(405).send(results);
         }
-        console.log(results)
     });
 
 })
@@ -248,7 +244,6 @@ exports.buscarArcoDocente = ('/buscarArcoDocente/:DOCENTE_ID', (req, res) => {
         } else {
             res.status(405).send(results);
         }
-        console.log(results)
     });
 
 })

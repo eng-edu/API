@@ -20,7 +20,7 @@ const tokenAPI = require('./token')
 
 //configura conexao com banco
 exports.connection = mysql.createConnection({
-  host: 'localhost',
+  host: '192.168.10.117',
   port: '3306',
   user: 'root',
   password: '6code384',

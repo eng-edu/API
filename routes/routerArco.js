@@ -15,8 +15,6 @@ router.get('/bucarArcosCompartilhados/', manterArco.bucarArcosCompartilhados)
 router.get('/buscarArcoDocente/:DOCENTE_ID/', manterArco.buscarArcoDocente)
 
 
-
-
 //exporta o modulo
 module.exports = router
 

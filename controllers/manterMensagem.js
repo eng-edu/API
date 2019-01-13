@@ -10,7 +10,6 @@ socket.on('connection',(io)=>{
             if (results.length > 0) {
                 io.emit(s, results);
                 io.broadcast.emit(s, results);
-                console.log(results);
             } 
         });
      });
