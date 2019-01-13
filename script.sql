@@ -17,13 +17,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema bdarco
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bdarco` DEFAULT CHARACTER SET utf8 ;
-USE `bdarco` ;
+CREATE SCHEMA IF NOT EXISTS `BDARCO` DEFAULT CHARACTER SET utf8 ;
+USE `BDARCO` ;
 
 -- -----------------------------------------------------
 -- Table `bdarco`.`arco`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`arco` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`ARCO` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `STATUS` VARCHAR(45) NOT NULL,
   `NOME` VARCHAR(45) NOT NULL,
@@ -38,7 +38,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`discente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`discente` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`DISCENTE` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `INSTITUICAO` VARCHAR(45) NULL,
   `NOME` VARCHAR(45) NULL,
@@ -53,7 +53,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`docente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`docente` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`DOCENTE` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `FORMACAO` VARCHAR(45) NULL,
   `NOME` VARCHAR(45) NULL,
@@ -68,7 +68,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`documento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`documento` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`DOCUMENTO` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NOME` TEXT NULL,
   `CAMINHO` TEXT NULL,
@@ -82,7 +82,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`etapa`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`etapa` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`ETAPA` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(45) NULL,
   `RESUMO` TEXT NULL,
@@ -96,7 +96,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`generate_id`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`generate_id` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`GENERATE_ID` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NAME` VARCHAR(256) NULL,
   PRIMARY KEY (`ID`))
@@ -107,7 +107,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`grupo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`grupo` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`GRUPO` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(45) NULL,
   `DISCENTE_ID` INT(11) NULL,
@@ -120,7 +120,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`mensagem`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`mensagem` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`MENSAGEM` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `TEXTO` VARCHAR(45) NULL,
   `IDAUTOR` INT(11) NULL,
@@ -134,7 +134,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `bdarco`.`solicitacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdarco`.`solicitacao` (
+CREATE TABLE IF NOT EXISTS `BDARCO`.`SOLICITACAO` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `ARCO_ID` INT(11) NOT NULL,
   `DOCENTE_ID` INT(11) NOT NULL,
@@ -142,15 +142,15 @@ CREATE TABLE IF NOT EXISTS `bdarco`.`solicitacao` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-USE `bdarco` ;
+USE `BDARCO` ;
 
 -- -----------------------------------------------------
 -- procedure verificar_completo
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `bdarco`$$
-CREATE DEFINER=`root`@`%` PROCEDURE `verificar_completo`(arco_id int)
+USE `BDARCO`$$
+CREATE DEFINER=`root`@`%` PROCEDURE `VERIFICA_STATUS_ARCO`(arco_id int)
 BEGIN
    IF(select count(BDARCO.ETAPA.STATUS)
 	from BDARCO.ETAPA

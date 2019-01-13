@@ -37,7 +37,7 @@ exports.put2 = ('/submeterEtapa/:ID/:RESUMO', (req, res) => {
 
 
     execute.executeSQL(sqlQry2, function (res_ARDO_ID) {
-        verficar(`CALL verificar_completo(${res_ARDO_ID[0].ID})`)
+        verficar(`CALL VERIFICA_STATUS_ARCO(${res_ARDO_ID[0].ID})`)
     });
 
 
@@ -62,7 +62,7 @@ exports.put3 = ('/aprovarEtapa/:ID/:PROX_ID/:ARCO_ID', (req, res) => {
 
     var sqlQry1 = `UPDATE ETAPA SET STATUS = 1 WHERE ID = '${ID}' AND ARCO_ID = '${ARCO_ID}'`
     var sqlQry2 = `UPDATE ETAPA SET STATUS = 4 WHERE ID = '${PROX_ID}' AND ARCO_ID = '${ARCO_ID}' AND STATUS = 5`
-    var sqlQry3 = `CALL verificar_completo(${ARCO_ID})`
+    var sqlQry3 = `CALL VERIFICA_STATUS_ARCO(${ARCO_ID})`
 
 
     execute.executeSQL(sqlQry1, function (results) {

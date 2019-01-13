@@ -189,8 +189,4 @@ exports.aceitarSolicitacao = ('/aceitarSolicitacao/:ID/:ARCO_ID', (req, res) => 
             console.log(results)
         });
     }
-
-
-
-
 })
