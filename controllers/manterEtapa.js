@@ -1,7 +1,7 @@
 'use strict';
 const socket = require('../server/serverSocket');
 const execute = require('../executeSQL');
-var io_
+
 
 socket.on('connection', (io) => {
     io.on('ATUALIZOU_ARCO', function (ARCO_ID) {
