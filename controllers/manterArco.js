@@ -3,7 +3,6 @@ const execute = require('../executeSQL');
 
 exports.buscarArcoDiscente = ('/buscarArcoDiscente/:DISCENTE_ID', (req, res) => {
 
-
     var sqlQry = `select ARCO.ID, ARCO.STATUS, ARCO.NOME, ARCO.ID_CRIADOR, ARCO.DOCENTE_ID, ARCO.COMPARTILHADO from ARCO inner join GRUPO where DISCENTE_ID = '${req.params.DISCENTE_ID}' AND ARCO.ID = GRUPO.ARCO_ID`;
     execute.executeSQL(sqlQry, function (results) {
 
@@ -126,10 +125,8 @@ exports.novoArco = ('/novoArco/:JSON', (req, res) => {
 
 exports.compartilharArco = ('/compartilharArco/:ID/:COMPARTILHADO', (req, res) => {
 
-
     const ID = req.params.ID
     const COMPARTILHADO = req.params.COMPARTILHADO;
-
     var sqlQry = `UPDATE ARCO SET COMPARTILHADO = '${COMPARTILHADO}' WHERE ID = '${ID}'`
 
     execute.executeSQL(sqlQry, function (results) {
@@ -233,8 +230,6 @@ exports.bucarArcosCompartilhados = ('/bucarArcosCompartilhados', (req, res) => {
 })
 
 exports.buscarArcoDocente = ('/buscarArcoDocente/:DOCENTE_ID', (req, res) => {
-
-
 
     var sqlQry = `SELECT * FROM ARCO WHERE DOCENTE_ID = '${req.params.DOCENTE_ID}' AND NOT ARCO.STATUS = 'AGUARDANDO APROVAÇÃO DE ORIENTAÇÃO';`;
 
