@@ -148,51 +148,27 @@ exports.excluirArco = ('/excluirArco/:ID', (req, res) => {
     var sqlQry5 = `DELETE FROM DOCUMENTO WHERE ARCO_ID = '${req.params.ID}'`;
 
     excluirDocumentos()
-
-
+    deletarGrupo()
+    deletarSolicitacao()
+    deletarArco()
+    
     function deletarEtapa() {
-
         execute.executeSQL(sqlQry1, function (results) {
-
-            if (results['affectedRows'] > 0) {
-                deletarGrupo()
-
-            } else {
-                console.log(results);
-            }
-
         });
-
     }
 
     function deletarGrupo() {
         execute.executeSQL(sqlQry2, function (results) {
-
-            if (results['affectedRows'] > 0) {
-                deletarSolicitacao()
-            } else {
-                console.log(results);
-            }
-
         });
     }
 
     function deletarSolicitacao() {
         execute.executeSQL(sqlQry3, function (results) {
-
-            if (results['affectedRows'] > 0) {
-                deletarArco()
-            } else {
-                console.log(results);
-                deletarArco()
-            }
-
         });
     }
 
     function deletarArco() {
         execute.executeSQL(sqlQry4, function (results) {
-
             if (results['affectedRows'] > 0) {
                 res.status(200).send({ results });
             } else {
