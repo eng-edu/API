@@ -29,7 +29,7 @@ exports.connection = mysql.createConnection({
 
 //ver imagem
 app.get('/IMG/:NAME', function (req, res) {
-  var filePath = "/uploads/"+req.params.NAME;
+  var filePath = "/uploads/" + req.params.NAME;
   console.log("chamou arquivo: " + req.params.NAME)
   var fs = require('fs')
   fs.readFile(__dirname + filePath, function (err, data) {
@@ -41,7 +41,7 @@ app.get('/IMG/:NAME', function (req, res) {
 
 //ver pdf link
 app.get('/PDF/:NAME', function (req, res) {
-  var filePath = "/uploads/"+req.params.NAME;
+  var filePath = "/uploads/" + req.params.NAME;
   console.log("chamou arquivo: " + req.params.NAME)
   var fs = require('fs')
   fs.readFile(__dirname + filePath, function (err, data) {
