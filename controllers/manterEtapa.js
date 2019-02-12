@@ -6,9 +6,7 @@ const execute = require('../executeSQL');
 socket.on('connection', (io) => {
     io.on('ATUALIZOU_ARCO', function (ARCO_ID) {
         var s = 'ARCO'+ARCO_ID;
-
         console.log(s)
-
         var sqlQry = `SELECT * FROM ARCO WHERE ID = ${ARCO_ID}`;
         execute.executeSQL(sqlQry, function (results) {
             if (results.length > 0) {
@@ -16,9 +14,7 @@ socket.on('connection', (io) => {
                 io.broadcast.emit(s, results);
             } 
         });
-    })
-    
-
+    }) 
 });
 
 
